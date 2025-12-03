@@ -1,0 +1,5 @@
+{
+  "name": "TimeCapsule",
+  "description": "A dual-purpose application: Explore how facts and beliefs have evolved since your birth year using Google Search grounding, and edit images using the latest Gemini Nano Banana models.",
+  "requestFramePermissions": []
+}
