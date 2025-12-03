@@ -8,10 +8,10 @@ import { Calendar, Search, Sparkles, Loader2, Globe, Filter, X } from 'lucide-re
 const TOPICS = ['Education', 'Superstition', 'Belief', 'Urban Legends', 'Records', 'Trivia', 'Religion', 'Health', 'Food', 'Science', 'Technology'];
 
 interface TimelineViewProps {
-  onVisualize?: (prompt: string) => void;
+  // Removed onVisualize prop as the editor feature is removed
 }
 
-export const TimelineView: React.FC<TimelineViewProps> = ({ onVisualize }) => {
+export const TimelineView: React.FC<TimelineViewProps> = () => {
   const [birthYear, setBirthYear] = useState<string>('');
   const [country, setCountry] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -106,7 +106,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onVisualize }) => {
                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-indigo-300" />
                  <input
                    type="text"
-                   placeholder="e.g. Pugs, Smartphones, The Beatles"
+                   placeholder="e.g. the sun is out while raining"
                    value={searchTerm}
                    onChange={(e) => setSearchTerm(e.target.value)}
                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-900 dark:bg-slate-950 border-2 border-slate-800 dark:border-slate-700 focus:border-indigo-500 dark:focus:border-indigo-500 text-white placeholder-slate-500 font-bold text-lg outline-none transition-all"
@@ -185,15 +185,16 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onVisualize }) => {
               </div>
             </div>
 
-            {/* Submit Button */}
+            {/* Submit Button (Simplified) */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 transform active:scale-[0.98]"
+              className="w-full bg-slate-900 dark:bg-indigo-600 text-white py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl hover:bg-slate-800 dark:hover:bg-indigo-500 active:scale-[0.99] transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
-              {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Sparkles className="w-6 h-6" />}
-              Jump in
+                {loading ? <Loader2 className="w-6 h-6 animate-spin text-indigo-300 dark:text-indigo-200" /> : <Sparkles className="w-6 h-6 text-indigo-300 dark:text-indigo-200" />}
+                Jump in
             </button>
+
           </form>
 
           {error && (
@@ -210,7 +211,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ onVisualize }) => {
                {/* Timeline Container */}
               <div className="space-y-0">
                 {data.events.map((event, index) => (
-                  <TimelineCard key={index} event={event} index={index} onVisualize={onVisualize} />
+                  <TimelineCard key={index} event={event} index={index} />
                 ))}
               </div>
             </div>

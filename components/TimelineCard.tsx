@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { TimelineEvent } from '../types';
-import { ArrowRight, CheckCircle2, AlertCircle, RefreshCw, XCircle, ChevronDown, ChevronUp, ExternalLink, Wand2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, AlertCircle, RefreshCw, XCircle, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 
 interface TimelineCardProps {
   event: TimelineEvent;
   index: number;
-  onVisualize?: (prompt: string) => void;
 }
 
 const StatusIcon = ({ status }: { status: TimelineEvent['status'] }) => {
@@ -33,11 +32,8 @@ const StatusBadge = ({ status }: { status: TimelineEvent['status'] }) => {
   );
 };
 
-export const TimelineCard: React.FC<TimelineCardProps> = ({ event, index, onVisualize }) => {
+export const TimelineCard: React.FC<TimelineCardProps> = ({ event, index }) => {
   const [isExpanded, setIsExpanded] = useState(true);
-
-  // Check for "mystical" categories for the easter egg
-  const isMystical = ['Urban Legends', 'Superstition', 'Myth', 'Belief'].some(cat => event.category.includes(cat));
 
   return (
     <div className="relative pl-8 md:pl-0">
@@ -93,7 +89,7 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({ event, index, onVisu
                     {event.context}
                   </div>
                   
-                  {/* Footer Actions: Source & Easter Egg */}
+                  {/* Footer Actions: Source */}
                   <div className="flex flex-wrap items-center justify-between gap-4 mt-4 pt-2">
                     {event.sourceUrl ? (
                       <a 
@@ -106,21 +102,6 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({ event, index, onVisu
                         Source
                       </a>
                     ) : <span />}
-
-                    {/* Easter Egg / Visualize Feature */}
-                    {isMystical && onVisualize && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onVisualize(`A mysterious and artistic representation of the urban legend: ${event.originalBelief}. Dark, atmospheric, cinematic style.`);
-                        }}
-                        className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-bold hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors"
-                        title="Create art from this myth"
-                      >
-                        <Wand2 className="w-3 h-3" />
-                        Visualize This
-                      </button>
-                    )}
                   </div>
                 </div>
 
